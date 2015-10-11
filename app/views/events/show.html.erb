@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Titre: <%= @event.title %></h1>
+<p>Description: <%= @event.description %></p>
+<p><%= image_tag @event.image.url %></p>
+<p>Horaires:</p>
+<p>Date début: <%= @event.date_begin.strftime("%Y %B %d") %></p>
+<p>Heure début: <%= @event.time_begin.strftime("%H:%M") %></p>
+<p>Date fin: <%= @event.date_end.strftime("%Y %B %d") %></p>
+<p>Heure fin: <%= @event.time_end.strftime("%H:%M") %></p>
+</br>
+<p><%= @event.user.email if @event.user %></p>
+<p>Id catégorie: <%= @event.category_id %></p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

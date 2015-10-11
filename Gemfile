@@ -24,6 +24,23 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Installation Bootstrap
 gem 'bootstrap-sass'
 
+#Formulaires Bootstrap
+gem 'bootstrap_form'
+
+#Gestion des users
+gem 'devise'
+
+#Gestion des images
+gem 'paperclip', '~> 4.2'
+
+#Pagination
+gem 'will_paginate', '~> 3.0.5'
+
+#Bootstrap pour pagination
+gem 'will_paginate-bootstrap'
+
+#Filter
+gem 'filterrific'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
