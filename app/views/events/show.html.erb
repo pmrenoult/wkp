@@ -1,16 +1,40 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Titre: <%= @event.title %></h1>
-<p>Description: <%= @event.description %></p>
-<p><%= image_tag @event.image.url %></p>
-<p>Horaires:</p>
-<p>Date début: <%= @event.date_begin.strftime("%Y %B %d") %></p>
-<p>Heure début: <%= @event.time_begin.strftime("%H:%M") %></p>
-<p>Date fin: <%= @event.date_end.strftime("%Y %B %d") %></p>
-<p>Heure fin: <%= @event.time_end.strftime("%H:%M") %></p>
+<div class="row">
+<h1><%= @event.title %></small></h1>
+<h1><small>catégorie <%= @event.category_id %></small></h1>
+</div>
+<div class="row">
+  <div class="row ">
+
+</div>
 </br>
-<p><%= @event.user.email if @event.user %></p>
-<p>Id catégorie: <%= @event.category_id %></p>
+<div class="row">
+  <div class="col-md-7">
+  	<p>Description: <%= @event.description %></p>
+  	<br>
+    <%= image_tag @event.image.url(:medium), class: "img-responsive" %>
+  </br>
+  </div>
+  <div class="col-md-4 col-md-offset-1">
+    <div class="panel panel-default">
+    <div class="panel-heading">Event details</div>
+    <div class="panel-body">
+    <p>Du <%= @event.date_begin %> au <%= @event.date_end.strftime("%Y %B %d") %></p>
+    <p>Horaires: de <%= @event.time_begin.strftime("%H:%M") %> à <%= @event.time_end.strftime("%H:%M") %></p>
+    </div>
+    <div class="panel-body">
+    <p>Organisateur: <%= @event.user.name if @event.user %></p>
+    <p><%= link_to "Contact", events_path, class: "btn btn-primary btn-md" %></p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+    </div>
+    </div>
+  </div>
+</div>
+
+</br>
+<div class="row">
+  <div class="col-md-1"><%= link_to 'Edit', edit_event_path(@event) %></div>
+  <div class="col-md-1"><%= link_to 'Back', events_path %></div>
+  <div class="col-md-6"></div>
+</div>
+</br>

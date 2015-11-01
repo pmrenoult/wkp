@@ -29,6 +29,30 @@ class EventsController < ApplicationController
     end
   end
 
+  def home
+    # @events = Event.all
+
+    @categories = Category.all
+    @filterrific = initialize_filterrific(
+    Event,
+    params[:filterrific],
+    select_options: {
+      sorted_by: Event.options_for_sorted_by,
+      with_category_id: Category.options_for_select
+
+    },
+    # persistence_id: 'shared_key',
+    # default_filter_params: {},
+    # available_filters: [],
+  ) or return
+    @events = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # GET /events/1
   # GET /events/1.json
   def show

@@ -39,6 +39,11 @@ gem 'will_paginate', '~> 3.0.5'
 #Bootstrap pour pagination
 gem 'will_paginate-bootstrap'
 
+
+#Pour choix date
+gem 'bootstrap-datepicker-rails'
+
+
 #Filter
 gem 'filterrific'
 

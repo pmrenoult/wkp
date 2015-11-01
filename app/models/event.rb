@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :category
 
-	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+	has_attached_file :image, :styles => { :medium => "1024x1024>", :thumb => "100x100>" }
 	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 	filterrific(
@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
 	  ]
 	)
 
-	  self.per_page = 10
+	  self.per_page = 5
 
   scope :search_query, lambda { |query|
 	  # Searches the students table on the 'first_name' and 'last_name' columns.
@@ -67,13 +67,11 @@ class Event < ActiveRecord::Base
 	  where(category_id: [*category_ids])
 	}
 
-
-
 	def self.options_for_sorted_by
 		[
 			['Name (a-z)', 'title_asc'],
-			['Registration date (newest first)', 'date_begin_desc'],
-			['Registration date (oldest first)', 'date_begin_asc'],
+			['Begin date (newest first)', 'date_begin_desc'],
+			['Begin date (oldest first)', 'date_begin_asc'],
 		]
   end
 end
