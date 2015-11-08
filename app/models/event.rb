@@ -5,6 +5,8 @@ class Event < ActiveRecord::Base
 	has_attached_file :image, :styles => { :medium => "1024x1024>", :thumb => "100x100>" }
 	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+	acts_as_taggable_on :tags
+
 	filterrific(
 	  default_filter_params: { sorted_by: 'date_begin_desc' },
 	  available_filters: [

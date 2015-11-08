@@ -2,7 +2,8 @@
  -->
 <h1>Listing Events</h1>
 </br>
-<%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
+<%= form_for_filterrific @filterrific do |f| %>
+
 <div class="row">
   <div class = "col-md-3">
   <%= f.select(
@@ -19,7 +20,7 @@
       <%= f.text_field(
         :search_query,
         # class: 'filterrific-periodically-observed form-control'
-        class: 'form-control'
+        class: 'form-control filterrific-periodically-observed'
       ) %>
       <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
     </div>
@@ -37,7 +38,7 @@
 </br>    
 <div>
   <%# add an automated spinner to your form when the list is refreshed %>
-  <%= render_filterrific_spinner %>
+  <%# render_filterrific_spinner %>
 <% end %>
 </div>
 </br>

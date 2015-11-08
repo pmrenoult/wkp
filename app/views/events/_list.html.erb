@@ -9,13 +9,16 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= link_to event.title, event_path(event) %></td>
-        <td><%= event.description %></td>
+<!--         <td><%= event.description %></td>
+ -->        
+        <td>Tags: <%= raw event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+
         <td><%= image_tag event.image.url(:thumb) %></td>
         <td><%= event.date_begin %></td>
         <td><%= event.time_begin.strftime("%H:%M") %></td>
         <td><%= event.date_end %></td>
         <td><%= event.time_end.strftime("%H:%M") %></td>
-        <td><%= event.user.email if event.user %></td>
+        <td><%= link_to event.user.name, user_path(event.user) %></td>
         <% if event.user == current_user %>
           <td><%= link_to 'Edit', edit_event_path(event) %></td>
           <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,8 +26,10 @@
       </tr>
     <% end %>
   </table>
-</div>
+
 
 <div class="text-center">
 <%= will_paginate @events, renderer: BootstrapPagination::Rails %>
+</div>
+
 </div>

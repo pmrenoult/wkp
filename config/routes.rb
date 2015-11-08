@@ -3,12 +3,22 @@ Rails.application.routes.draw do
   resources :events
   devise_for :users
   resources :users
+
+  resources :events do
+    get :autocomplete_event_title, :on => :collection    
+  end
+
+
   # root "pages#home"
   root "events#home"
   get "about" => "pages#about"
   get "events" => "events#index"
   get "eventshome" => "events#home"
 
+  get 'tags/:tag', to: 'events#index', as: :tag
+
+  get 'users/:id' => 'users#show'
+  get "users" => "users#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

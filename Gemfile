@@ -33,6 +33,12 @@ gem 'devise'
 #Gestion des images
 gem 'paperclip', '~> 4.2'
 
+#Tags des events
+gem 'acts-as-taggable-on'
+
+#Autocomplete
+gem 'rails-jquery-autocomplete'
+
 #Pagination
 gem 'will_paginate', '~> 3.0.5'
 

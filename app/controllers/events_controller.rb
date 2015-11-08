@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :home, :show]
 
   # GET /events
   # GET /events.json
@@ -9,19 +9,20 @@ class EventsController < ApplicationController
     # @events = Event.all
 
     @categories = Category.all
+
     @filterrific = initialize_filterrific(
     Event,
     params[:filterrific],
     select_options: {
       sorted_by: Event.options_for_sorted_by,
       with_category_id: Category.options_for_select
-
     },
-    # persistence_id: 'shared_key',
-    # default_filter_params: {},
-    # available_filters: [],
   ) or return
-    @events = @filterrific.find.page(params[:page])
+    if params[:tag]
+      @events = @filterrific.find.page(params[:page]).tagged_with(params[:tag])
+    else
+      @events = @filterrific.find.page(params[:page])
+    end
 
     respond_to do |format|
       format.html
@@ -33,19 +34,7 @@ class EventsController < ApplicationController
     # @events = Event.all
 
     @categories = Category.all
-    @filterrific = initialize_filterrific(
-    Event,
-    params[:filterrific],
-    select_options: {
-      sorted_by: Event.options_for_sorted_by,
-      with_category_id: Category.options_for_select
-
-    },
-    # persistence_id: 'shared_key',
-    # default_filter_params: {},
-    # available_filters: [],
-  ) or return
-    @events = @filterrific.find.page(params[:page])
+    @last_events = Event.order("created_at desc").limit(5)
 
     respond_to do |format|
       format.html
@@ -130,6 +119,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title,:description, :image, :date_begin, :time_begin, :date_end, :time_end)
+      params.require(:event).permit(:title,:description, :image, :date_begin, :time_begin, :date_end, :time_end, :tag_list)
     end
 end
