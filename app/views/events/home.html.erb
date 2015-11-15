@@ -20,7 +20,8 @@
 
 <% @last_events.each do |last_event| %>
 <%= link_to last_event.title, event_path(last_event) %>
-<%= image_tag last_event.image.url(:thumb) %>
+<%= link_to image_tag(last_event.image.url(:thumb)), event_path(last_event) %>
+
 </br>
 <% end %>
 

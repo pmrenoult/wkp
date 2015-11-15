@@ -1,2 +1,59 @@
-<%= @user.name %></br>
-<%= @user.email %>
+<h1><%= @user.name %></h1>
+<h1><small><%= @user.email %></small></h1>
+<p>Address: <%= @user.address %></p>
+<p>Latitude: <%= @user.latitude %></p>
+<p>Longitude: <%= @user.longitude %></p>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 300px;'></div>
+</div>
+
+</br>
+<% if @user == current_user %>
+      <%= link_to "Edit profile", edit_user_registration_path, class: "btn btn-default" %>
+<% end %>
+
+<h2><%= @user.name %>'s events</h2>
+<table class="table">
+	<% Event.where(user: @user).each do |event| %>
+	<td><%= link_to event.title, event_path(event) %></td>
+<!--         <td><%= event.description %></td>
+-->        
+      <td><%= link_to image_tag(event.image.url(:thumb)), event_path(event) %></td>
+
+      <td><%= event.date_begin %></td>
+      <td><%= event.time_begin.strftime("%H:%M") %></td>
+      <td><%= event.date_end %></td>
+      <td><%= event.time_end.strftime("%H:%M") %></td>
+      <% if event.user == current_user %>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+
+<script>
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {zoom: 18, center: new google.maps.LatLng('<%= @user.latitude %>', '<%= @user.longitude %>'), disableDefaultUI: true }, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers([
+    {
+    	"lat": '<%=@user.latitude%>',
+			"lng": '<%=@user.longitude%>',
+      "infowindow": '<%=@user.name%>'
+    }
+  ]);
+  // handler.bounds.extendWith(markers);
+  // handler.fitMapToBounds();
+  // map.setOptions(opt);
+
+});
+</script>
+
+
+
+
+
+<%# link_to event.title, event_path(event) %>
+<%# link_to image_tag(event.image.url(:thumb)), event_path(event) %>

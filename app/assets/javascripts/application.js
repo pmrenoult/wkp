@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
@@ -18,3 +19,10 @@
 //= require bootstrap-datepicker
 //= require filterrific/filterrific-jquery
 //= require autocomplete-rails
+//= require jquery.geocomplete
+//= require underscore-min
+//= require gmaps/google
+
+$(function() {
+$("#geo-input").geocomplete();
+});  

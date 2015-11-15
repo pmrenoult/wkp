@@ -13,7 +13,8 @@
  -->        
         <td>Tags: <%= raw event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
 
-        <td><%= image_tag event.image.url(:thumb) %></td>
+        <td><%= link_to image_tag(event.image.url(:thumb)), event_path(event) %></td>
+
         <td><%= event.date_begin %></td>
         <td><%= event.time_begin.strftime("%H:%M") %></td>
         <td><%= event.date_end %></td>
